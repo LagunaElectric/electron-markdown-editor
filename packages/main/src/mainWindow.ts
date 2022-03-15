@@ -1,9 +1,10 @@
-import {BrowserWindow, BrowserWindowConstructorOptions} from 'electron';
+import type { BrowserWindowConstructorOptions} from 'electron';
+import {BrowserWindow} from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
 
 async function createWindow() {
-  let browserOptions: BrowserWindowConstructorOptions = {
+  const browserOptions: BrowserWindowConstructorOptions = {
     show: false, // Use 'ready-to-show' event to show window
     webPreferences: {
       nativeWindowOpen: true,
@@ -14,6 +15,7 @@ async function createWindow() {
   if (process.platform === 'darwin') {
     browserOptions.vibrancy = 'under-window';
     browserOptions.visualEffectState = 'active';
+    //browserOptions.titleBarStyle = 'hidden';
   }
   console.info(browserOptions)
   const browserWindow = new BrowserWindow(browserOptions);
