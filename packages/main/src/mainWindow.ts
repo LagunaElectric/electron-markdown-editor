@@ -1,18 +1,22 @@
-import {BrowserWindow} from 'electron';
+import {BrowserWindow, BrowserWindowConstructorOptions} from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
 
 async function createWindow() {
-  const browserWindow = new BrowserWindow({
+  let browserOptions: BrowserWindowConstructorOptions = {
     show: false, // Use 'ready-to-show' event to show window
-    vibrancy: 'under-window',
-    visualEffectState: 'active',
     webPreferences: {
       nativeWindowOpen: true,
       webviewTag: false, // The webview tag is not recommended. Consider alternatives like iframe or Electron's BrowserView. https://www.electronjs.org/docs/latest/api/webview-tag#warning
       preload: join(__dirname, '../../preload/dist/index.cjs'),
     },
-  });
+  }
+  if (process.platform === 'darwin') {
+    browserOptions.vibrancy = 'under-window';
+    browserOptions.visualEffectState = 'active';
+  }
+  console.info(browserOptions)
+  const browserWindow = new BrowserWindow(browserOptions);
 
   /**
    * If you install `show: true` then it can cause issues when trying to close the window.

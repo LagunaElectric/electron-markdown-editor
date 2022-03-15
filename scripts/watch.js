@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const {createServer, build, createLogger} = require('vite');
+const { createServer, build, createLogger } = require('vite');
 const electronPath = require('electron');
-const {spawn} = require('child_process');
+const { spawn } = require('child_process');
 
 
 /** @type 'production' | 'development'' */
@@ -33,11 +33,11 @@ const stderrFilterPatterns = [
 /**
  * @param {{name: string; configFile: string; writeBundle: import('rollup').OutputPlugin['writeBundle'] }} param0
  */
-const getWatcher = ({name, configFile, writeBundle}) => {
+const getWatcher = ({ name, configFile, writeBundle }) => {
   return build({
     ...sharedConfig,
     configFile,
-    plugins: [{name, writeBundle}],
+    plugins: [{ name, writeBundle }],
   });
 };
 
@@ -46,7 +46,7 @@ const getWatcher = ({name, configFile, writeBundle}) => {
  * Start or restart App when source files are changed
  * @param {{config: {server: import('vite').ResolvedServerOptions}}} ResolvedServerOptions
  */
-const setupMainPackageWatcher = ({config: {server}}) => {
+const setupMainPackageWatcher = ({ config: { server } }) => {
   // Create VITE_DEV_SERVER_URL environment variable to pass it to the main process.
   {
     const protocol = server.https ? 'https:' : 'http:';
@@ -75,7 +75,7 @@ const setupMainPackageWatcher = ({config: {server}}) => {
 
       spawnProcess = spawn(String(electronPath), ['.']);
 
-      spawnProcess.stdout.on('data', d => d.toString().trim() && logger.warn(d.toString(), {timestamp: true}));
+      spawnProcess.stdout.on('data', d => d.toString().trim() && logger.warn(d.toString(), { timestamp: true }));
       spawnProcess.stderr.on('data', d => {
         const data = d.toString().trim();
         if (!data) return;
@@ -95,7 +95,7 @@ const setupMainPackageWatcher = ({config: {server}}) => {
  * Start or restart App when source files are changed
  * @param {{ws: import('vite').WebSocketServer}} WebSocketServer
  */
-const setupPreloadPackageWatcher = ({ws}) =>
+const setupPreloadPackageWatcher = ({ ws }) =>
   getWatcher({
     name: 'reload-page-on-preload-package-change',
     configFile: 'packages/preload/vite.config.js',
