@@ -8,8 +8,7 @@ const App: React.FC = () => {
     const handleDocChange = useCallback(
       newDoc => {
         setDoc(newDoc)
-      },
-      [],
+      }, [],
     )
     
     return (
