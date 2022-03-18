@@ -33,7 +33,8 @@ const config = {
     rollupOptions: {
       input: join(PACKAGE_ROOT, 'index.html'),
       external: [
-        ...builtinModules.flatMap(p => [p, `node:${p}`]),
+        ...builtinModules.flatMap(p => [p, `node:${p}`])
+        .filter(m => m !== 'process' && m !== 'assert'),
       ],
     },
     emptyOutDir: true,

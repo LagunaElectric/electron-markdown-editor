@@ -1,5 +1,6 @@
 html, body {
     background-color: transparent;
+    height: 100%;
 }
 
 body {
@@ -10,5 +11,9 @@ body {
 }
 
 code {
-    font-family: source-code-pro, "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: Operator Mono, source-code-pro, "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#root {
+    height: 100%;
 }

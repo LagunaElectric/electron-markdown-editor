@@ -10,7 +10,6 @@ import { defaultHighlightStyle, HighlightStyle, tags } from "@codemirror/highlig
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown"
 import { languages } from "@codemirror/language-data"
 import { oneDark } from "@codemirror/theme-one-dark"
-import { javascript } from "@codemirror/lang-javascript"
 import type React from 'react'
 
 export const transparentTheme = EditorView.theme({
